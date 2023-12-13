@@ -1,9 +1,10 @@
 <?php
 
+use App\Models\User;
+use App\Models\Blog;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
 return new class extends Migration
 {
@@ -12,14 +13,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
-            $table->id('blog_id');
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->foreignIdFor(User::class, 'user_id')->constrained(table: 'users' ,column: 'user_id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('title', 255);
-            $table->text('content');
-            $table->string('image_url', 255)->nullable();
-            $table->boolean('locked')->default(false);
-            $table->boolean('deleted')->default(false);
+            $table->foreignIdFor(Blog::class, 'blog_id')->constrained(table: 'blogs' ,column: 'blog_id')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('bookmarks');
     }
 };

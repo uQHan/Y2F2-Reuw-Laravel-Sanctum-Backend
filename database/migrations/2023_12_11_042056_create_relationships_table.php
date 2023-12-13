@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
 return new class extends Migration
 {
@@ -12,14 +12,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
-            $table->id('blog_id');
+        Schema::create('relationships', function (Blueprint $table) {
             $table->foreignIdFor(User::class, 'user_id')->constrained(table: 'users' ,column: 'user_id')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('title', 255);
-            $table->text('content');
-            $table->string('image_url', 255)->nullable();
-            $table->boolean('locked')->default(false);
-            $table->boolean('deleted')->default(false);
+            $table->foreignIdFor(User::class, 'other_id')->constrained(table: 'users' ,column: 'user_id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->tinyText('status')->default('following');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('relationships');
     }
 };
