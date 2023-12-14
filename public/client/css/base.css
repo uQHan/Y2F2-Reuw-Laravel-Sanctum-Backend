@@ -83,3 +83,8 @@ img[src=""] {
 .w-90{
    width: 90%;
 }
+
+.prof-img{
+   max-height: 50px;
+   max-width: 50px;
+}
