@@ -22,7 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
         'date_of_birth',
-        'pfp_url'
+        'pfp_url',
+        'bio',
+        'website',
+        'deactivated'
     ];
 
     /**

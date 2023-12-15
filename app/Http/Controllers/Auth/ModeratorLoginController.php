@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ModeratorLoginController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('moderator.login');
+    }
 }

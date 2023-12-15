@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\ModeratorLoginController;
+use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Client\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('client.welcome');
-});
-Route::get('/welcome', function () {
-    return view('client.welcome');
-});
-Route::get('/home', function () {
-    return view('client.home');
+//client routes
+Route::get('/', [UserLoginController::class, 'index']);
+Route::get('/welcome', [UserLoginController::class, 'index']);
+Route::get('/home', [BlogController::class, 'index']);
+
+//mode routes
+Route::get('/mod', [ModeratorLoginController::class, 'index']);
+Route::get('/dashboard', [ModeratorLoginController::class, 'index']);
+
+
+Route::middleware('mod')->group(function(){
+    //backend mod routes
 });

@@ -28,7 +28,7 @@
 						to continue
 					</p>
 				</div>
-				<div class="col-12 col-md-5 bg-white cover">
+				<div class="col-12 col-md-5 cover">
 					<a href="mailto:hanng.22ite@vku.udn.vn" class="text-decoration-none text-black">
 						<p class="text-end">hanng.22ite@vku.udn.vn</p>
 					</a>
