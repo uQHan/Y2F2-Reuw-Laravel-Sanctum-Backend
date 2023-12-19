@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class ModAuthenticate
+class AdminAuthenticate
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class ModAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 1){
+        if (Auth::check() && Auth::user()->role == 2){
             return $next($request);
         }
         return redirect("client.welcome");

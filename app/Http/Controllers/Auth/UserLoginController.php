@@ -14,10 +14,10 @@ class UserLoginController extends Controller
         return view('client.welcome');
     }
 
-    public function store(LoginRequest $request)
+    public function store(Request $request)
     {
-        if (Auth::attempt(['email'=>$request->email, 'password'=>$request->password], $request->remember)) {
-            return redirect('/');
+        if (Auth::attempt(['email'=>$request->loginEmail, 'password'=>$request->loginPassword], $request->loginRemember)) {
+            return redirect('/home');
         } else {
             return back()->withErrors([
                 'email' => 'Email hoặc mật khẩu không đúng.',

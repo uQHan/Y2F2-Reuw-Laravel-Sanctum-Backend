@@ -52,18 +52,24 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="main-content bg-secondary col-10 col-md-9 col-lg-7 
-					{{-- border border-dark border-top-0 border-bottom-0  --}}
-					cover text-white">
+				<div class="main-content bg-secondary col-10 col-md-9 col-lg-7 cover text-white">
+					{{-- border border-dark border-top-0 border-bottom-0 --}}
 					@yield('content')
 				</div>
 				<div class="sidebar d-none d-lg-block col-lg-3">
 					@yield('rightbar')
 					<div class="pt-2 sticky-top">
 						<div>
-							<a class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
-							<a href="{{ url('welcome') }}" class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
+							@if (Auth::check())
+							<a href="{{ url('logout') }}"
+								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
+							@endif
+							@if (Auth::guest())
+							<a href="{{ url('welcome') }}" 
+								class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
+							<a href="{{ url('welcome') }}"
+								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
+							@endif
 						</div>
 						<div class="container">
 							<div class="input-group pt-5 rounded-5">
@@ -74,13 +80,15 @@
 							<div class="card mt-4 btn btn-outline-dark text-start">
 								<div class="card-body">
 									<h5 class="card-title">What's new?</h5>
-									<p class="card-text">New thing appear every hour or so, so this is card is kinda meaningless</p>
+									<p class="card-text">New thing appear every hour or so, so this is card is kinda meaningless
+									</p>
 								</div>
 							</div>
 							<div class="card mt-4 btn btn-outline-dark text-start">
 								<div class="card-body">
 									<h5 class="card-title">Recent update?</h5>
-									<p class="card-text">Same as the above I think, man I really hope didnt prcastinate this much</p>
+									<p class="card-text">Same as the above I think, man I really hope didnt prcastinate this much
+									</p>
 								</div>
 							</div>
 						</div>

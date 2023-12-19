@@ -18,10 +18,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('role')->default(0);
-            $table->date('date-of-birth')->nullable();
-            $table->string('pfp_url', 255)->nullable()->default('default-pfp.jpg');
-            $table->tinyText('bio')->nullable();
-            $table->tinyText('website')->nullable();
             $table->boolean('deactivated')->default(false);
             $table->rememberToken();
             $table->timestamps();

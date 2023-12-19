@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('user_settings', function (Blueprint $table) {
             $table->foreignIdFor(User::class, 'user_id')->constrained(table: 'users' ,column: 'user_id')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->date('date-of-birth')->nullable();
+            $table->string('pfp_url', 255)->nullable()->default('default-pfp.jpg');
+            $table->tinyText('bio')->nullable();
+            $table->tinyText('website')->nullable();
             $table->boolean('dark_mode')->nullable();
             $table->tinyText('block_tags')->nullable();
             $table->string('block_users')->nullable();

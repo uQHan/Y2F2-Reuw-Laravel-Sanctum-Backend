@@ -47,18 +47,24 @@
 								</div>
 								<div id="loginForm" class="accordion-collapse collapse show" data-bs-parent="#welcomeForm">
 									<div class="accordion-body">
-										<form class="container" aria-labelledby="loginHeader">
+										<form class="container" aria-labelledby="loginHeader" method="post" action="/login">
+											@csrf
 											<div class="form-group mb-2">
 												Email*
-												<input type="email" class="form-control" placeholder="Enter email">
+												<input name="loginEmail" type="email" class="form-control"
+													placeholder="Enter email">
+												@error('email')
+												<div class="text-danger">{{ $message }}</div>
+												@enderror
 											</div>
 											<div class="form-group mb-2">
 												Password*
-												<input type="password" class="form-control" placeholder="Password">
+												<input name="loginPassword" type="password" class="form-control"
+													placeholder="Password">
 											</div>
 											<div class="d-flex justify-content-between">
 												<label>
-													<input type="checkbox"> Remember Me
+													<input name="loginRemember" type="checkbox"> Remember Me
 												</label>
 												<label class="pull-right">
 													<a href="#" class="text-decoration-none link-secondary">Forgotten Password?</a>
@@ -81,6 +87,7 @@
 								<div id="registerForm" class="accordion-collapse collapse" data-bs-parent="#welcomeForm">
 									<div class="accordion-body">
 										<form class="container" aria-labelledby="registerHeader">
+											@csrf
 											<div class="form-group mb-2">
 												Email*
 												<input type="email" class="form-control" placeholder="Enter email">
@@ -118,39 +125,7 @@
 		</div>
 	</main>
 	<footer class="bg-black text-white p-5">
-		<div class="container row px-5">
-			<div class="col">
-				<strong>About</strong>
-				<ul class="list-unstyled pt-2" style="line-height: 1.6rem;">
-					<li>Creator: Nguyen Gia Han (22IT.EB018)</li>
-					<li>Gmail:
-						<a href="mailto:hanng.22ite@vku.udn.vn" class="text-white">
-							hanng.22ite@vku.udn.vn
-						</a>
-					</li>
-				</ul>
-			</div>
-			<div class="col">
-				<strong>Made with</strong>
-				<ul class="list-unstyled pt-2" style="line-height: 1.6rem;">
-					<li>
-						<a href="https://laravel.com/docs/10.x" class="text-white">
-							Laravel 10.x
-						</a>
-					</li>
-					<li>
-						<a href="https://getbootstrap.com/docs/5.3/getting-started/introduction/" class="text-white">
-							Bootstrap v5.3
-						</a>
-					</li>
-					<li>
-						<a href="https://jscroll.com/#/" class="text-white">
-							jScroll
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+		@include('components.footer')
 	</footer>
 	<!-- Bootstrap JavaScript Libraries -->
 	@include('library.script')

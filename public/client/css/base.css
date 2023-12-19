@@ -85,6 +85,24 @@ img[src=""] {
 }
 
 .prof-img{
+   max-height: 200px;
+   max-width: 200px;
+}
+
+.pfp-img{
    max-height: 50px;
    max-width: 50px;
+}
+
+.at::first-letter{
+   display: none;
+}
+
+.blog-img-container{
+   max-height: 400px;
+}
+
+.blog-img-container img{
+   max-height: 400px;
+   width: auto;
 }
