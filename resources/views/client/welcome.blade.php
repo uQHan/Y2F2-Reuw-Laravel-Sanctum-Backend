@@ -86,55 +86,60 @@
 								</div>
 								<div id="registerForm" class="accordion-collapse collapse" data-bs-parent="#welcomeForm">
 									<div class="accordion-body">
-										<form class="container" aria-labelledby="registerHeader">
+										<form class="container" aria-labelledby="registerHeader" method="post" action="/register">
 											@csrf
 											<div class="form-group mb-2">
 												Email*
-												<input type="email" class="form-control" placeholder="Enter email">
+												<input name="registerEmail" type="email" class="form-control"
+													placeholder="Enter email">
+												{{-- @error('register')
+												<div class="text-danger">{{ $message }}</div>
+												@enderror --}}
 											</div>
+											<hr>
 											<div class="form-group mb-2">
 												Password*
-												<input type="password" class="form-control" placeholder="Password">
+												<input name="registerPassword" type="password" class="form-control"
+													placeholder="Password">
 											</div>
 											<div class="form-group mb-2">
 												Confirm password*
-												<input type="password" class="form-control" placeholder="Password">
+												<input name="registerPassword_confirmation" type="password" class="form-control"
+													placeholder="Password">
 											</div>
-											<div class="d-flex justify-content-between">
-												<label>
-													<input type="checkbox"> Remember Me
-												</label>
+											<div class="d-flex justify-content-end">
 												<label class="pull-right">
-													<a href="#" class="text-decoration-none link-secondary">Forgotten Password?</a>
+													<p data-bs-toggle="collapse" href="#loginForm" role="button" aria-expanded="true"
+														aria-controls="loginForm" class="text-decoration-none link-secondary">Already
+														have an
+														account?</p>
 												</label>
 											</div>
 											<div class="d-flex justify-content-around mt-3">
 												<button type="submit"
 													class="btn w-50 m-2 rounded-0 btn-outline btn-outline-dark fw-bold">Sign
-													In</button>
+													Up</button>
 											</div>
+
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
+							<div class="d-flex justify-content-around mt-5">
+								<a href="{{url('home')}}" class="text-decoration-none">Proceed as guest</a>
+							</div>
 					</div>
 				</div>
 
 			</div>
 		</div>
 	</main>
-	<footer class="bg-black text-white p-5">
+	<footer>
 		@include('components.footer')
 	</footer>
 	<!-- Bootstrap JavaScript Libraries -->
 	@include('library.script')
-	<script>
-		function myFunction()
-          {
-                alert("I am an alert box!")
-            }
-	</script>
 </body>
 
 </html>

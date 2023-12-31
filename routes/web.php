@@ -3,7 +3,10 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\UserLoginController;
+use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\ProfileController;
+use App\Http\Controllers\Client\UserSettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,17 +37,29 @@ use Illuminate\Support\Facades\Route;
 
 // require __DIR__.'/auth.php';
 
-//client routes
+//guest routes
 Route::get('/', [UserLoginController::class, 'index']);
-Route::get('/welcome', [UserLoginController::class, 'index']);
+Route::get('/welcome', [UserLoginController::class, 'index'])->name('welcome');
 Route::post('/login', [UserLoginController::class, 'store']);
+Route::post('/register', [UserRegisterController::class, 'store']);
 Route::get('/home', [BlogController::class, 'index']);
 
-//mode routes
-Route::get('/mod', [AdminLoginController::class, 'index']);
-Route::get('/dashboard', [AdminLoginController::class, 'index']);
+//client routes
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [UserLoginController::class, 'logout']);
+    Route::get('/setup-account', [UserSettingsController::class, 'index']);
+    Route::post('/setup-account', [UserSettingsController::class, 'store']);
+    
+    Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/settings', [UserSettingsController::class, 'index']);
+    Route::post('/settings', [UserSettingsController::class, 'update']);
+});
 
+//admin routes
+Route::get('/admin-login', [AdminLoginController::class, 'index']);
 
-Route::middleware('mod')->group(function(){
-    //backend mod routes
+//backend admin routes
+Route::middleware('admin')->group(function () {
+    
+    Route::get('/dashboard', [AdminController::class, 'index']);
 });

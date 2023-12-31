@@ -94,10 +94,6 @@ img[src=""] {
    max-width: 50px;
 }
 
-.at::first-letter{
-   display: none;
-}
-
 .blog-img-container{
    max-height: 400px;
 }

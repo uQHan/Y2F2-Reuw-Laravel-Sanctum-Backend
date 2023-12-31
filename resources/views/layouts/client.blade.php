@@ -6,6 +6,7 @@
 	<title>Reuw</title>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	@include('library.head')
+	@yield('css')
 </head>
 
 <body class="body-cover bg-light">
@@ -23,33 +24,36 @@
 							</a>
 						</div>
 						<div class="float-end float-md-none">
-							<a href="" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('home') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-solid fa-house icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Home</span>
 							</a>
 						</div>
 						<div class="float-end float-md-none">
-							<a href="" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('explore') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-solid fa-magnifying-glass icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Explore</span>
 							</a>
 						</div>
+						@if (Auth::check())
 						<div class="float-end float-md-none">
-							<a href="" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('bookmark') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-regular fa-bookmark icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Bookmark</span>
 							</a>
 						</div>
 						<div class="float-end float-md-none">
-							<a href="" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('profile') }}"
+								class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-regular fa-user-circle icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Profile</span>
 							</a>
 						</div>
+						@endif
 					</div>
 				</div>
 				<div class="main-content bg-secondary col-10 col-md-9 col-lg-7 cover text-white">
@@ -62,11 +66,10 @@
 						<div>
 							@if (Auth::check())
 							<a href="{{ url('logout') }}"
-								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
+								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Log Out</b></a>
 							@endif
 							@if (Auth::guest())
-							<a href="{{ url('welcome') }}" 
-								class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
+							<a href="{{ url('welcome') }}" class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
 							<a href="{{ url('welcome') }}"
 								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
 							@endif

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterUserRequests;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserRegisterController extends Controller
 {
@@ -14,10 +15,29 @@ class UserRegisterController extends Controller
         return view('client.welcome');
     }
 
-    public function store(RegisterUserRequests $request)
+    public function store(Request $request)
     {
-        $validated = $request->validated();
-        User::create($validated);
-        return redirect('login');
+        $validator = Validator::make($request->all(), [
+            'registerEmail' => 'required|email|unique:users,email',
+            'registerPassword' => 'required|confirmed',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator, 'register');
+        }
+        
+        $validator->validated();
+
+        $user = User::create([
+            'email' => $request->registerEmail,
+            'password' => $request->registerPassword,
+        ]);
+
+        Auth::loginUsingId($user->user_id);
+
+        if (!$user->settings()->exists()) {
+            return redirect('/setup-account');
+        }
+        return redirect('/home');
     }
 }
