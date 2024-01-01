@@ -18,7 +18,9 @@
             <h5>{{ $user->settings->username }}</h5>
             <div class="d-flex justify-content-between">
                 <p>{{ $user->email }}</p>
-                <a href="{{url('settings')}}" class="text-end text-white me-4"><i class="fa-solid fa-gear"></i></a>
+                @if ( $user->user_id == auth()->user()->user_id )
+                <a href="{{url('settings')}}" class="text-end text-white me-4"><i class="fa-solid fa-gear"></i></a>                    
+                @endif
             </div>
         </div>
     </div>
@@ -31,7 +33,7 @@
         </div>
         <div class="d-flex justify-content-end text-center py-1">
             <div class="me-1">
-                <p class="mb-1 h5">{{auth()->user()->blogs->count()}}</p>
+                <p class="mb-1 h5">{{ $user->blogs->count()}}</p>
                 <p class="small text-muted mb-0">Posts</p>
             </div>
             {{-- <div class="px-3">

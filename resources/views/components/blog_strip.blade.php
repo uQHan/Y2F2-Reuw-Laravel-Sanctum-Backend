@@ -17,7 +17,7 @@
          </div>
          <div class="w-100">
             <div class="pt-2 ps-2">
-               <span class="me-2"><b>{{ $settings->username }}</b></span>
+               <a href="{{ url('/profile/'.$blog->user_id) }}" class="text-decoration-none text-black"><span class="me-2"><b>{{ $settings->username }}</b></span></a>
                <div class="text-secondary">
                   <span class="me-1">
                      {{\Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}

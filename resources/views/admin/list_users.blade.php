@@ -34,7 +34,11 @@ Index
                         <tr class="d-flex justify-content-between @if ($user->deactivated) table-danger @endif">
                             <td class="w-20 counter">{{ $count++ }}</td>
                             <td class="w-50">
-                                <p>{{ $settings->username }}</p>
+                                <a href="{{ url('/profile/'.$user->user_id) }}"
+                                    class="text-decoration-none text-black"><span class="me-2">
+                                        <b>{{ $settings->username }}</b>
+                                    </span>
+                                </a>
                             </td>
                             <td class="w-50">
                                 <p>{{ $user->email }}</p>
@@ -53,8 +57,8 @@ Index
                             </td>
                             <td class="w-50">
                                 @if ($settings->website)
-                                    <a href="{{ $settings->website }}">link</p>
-                                @endif
+                                <a href="{{ $settings->website }}">link</p>
+                                    @endif
                             </td>
                             <td class="w-50" style="object-fit: contain">
                                 <img style="object-fit: contain" width="40px"

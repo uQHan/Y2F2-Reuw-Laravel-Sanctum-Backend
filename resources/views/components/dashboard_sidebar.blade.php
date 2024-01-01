@@ -33,6 +33,7 @@
         <strong class="d-none d-md-inline">{{ auth()->user()->settings->username }}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+        <li><a href="{{ url('home') }}" class="dropdown-item" href="#">Client view</a></li>
         <li><a href="{{ url('logout') }}" class="dropdown-item" href="#">Sign out</a></li>
       </ul>
     </div>

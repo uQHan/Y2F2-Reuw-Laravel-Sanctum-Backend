@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/setup-account', [UserSettingsController::class, 'store']);
     
     Route::get('/profile', [ProfileController::class, 'index']);
-    Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
+    Route::get('/profile/{user_id}', [ProfileController::class, 'orther']);
     Route::get('/settings', [UserSettingsController::class, 'settings']);
     Route::post('/settings', [UserSettingsController::class, 'update']);
 
@@ -73,7 +73,7 @@ Route::middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
 
     Route::get('/list-users', [AdminUserController::class, 'users']);
-    Route::get('/list-users/{user_id}', [AdminUserController::class, 'deactivate']);
+    Route::get('/deactiavate-users/{user_id}', [AdminUserController::class, 'deactivate']);
 
     Route::get('/list-blogs', [AdminBlogController::class, 'blogs']);
     Route::get('/remove-blog/{blog_id}', [AdminBlogController::class, 'remove']);
