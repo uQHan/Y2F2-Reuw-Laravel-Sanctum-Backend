@@ -10,17 +10,20 @@ class UserSettings extends Model
 {
     use HasFactory;
 
+    protected $table = 'user_settings';
+    protected $primaryKey = 'user_id';
+
     /**
      * Get the user that owns the UserSettings
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 
-    protected $primaryKey = 'user_id';
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
     protected $fillable = [
         'user_id',
         'username',

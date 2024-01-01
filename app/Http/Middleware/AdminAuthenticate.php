@@ -19,6 +19,6 @@ class AdminAuthenticate
         if (Auth::check() && Auth::user()->role == 2){
             return $next($request);
         }
-        return redirect("client.welcome");
+        return redirect("/welcome");
     }
 }

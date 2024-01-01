@@ -19,19 +19,22 @@
 				<div class="sidebar col-2 col-md-3 col-lg-2 text-secondary px-1">
 					<div class="sticky-top pt-5">
 						<div class="float-end float-md-none">
-							<a href="" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2">
+							<a href="{{ url('home') }}"
+								class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2">
 								<i class="fa-solid fa-spider p-1 p-md-2" style="font-size: 32px;"></i>
 							</a>
 						</div>
 						<div class="float-end float-md-none">
-							<a href="{{ url('home') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('home') }}"
+								class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-solid fa-house icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Home</span>
 							</a>
 						</div>
 						<div class="float-end float-md-none">
-							<a href="{{ url('explore') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('explore') }}"
+								class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-solid fa-magnifying-glass icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Explore</span>
@@ -39,7 +42,8 @@
 						</div>
 						@if (Auth::check())
 						<div class="float-end float-md-none">
-							<a href="{{ url('bookmark') }}" class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+							<a href="{{ url('bookmark') }}"
+								class="btn btn-outline-dark border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
 								<i class="fa-regular fa-bookmark icon me-md-3"></i>
 								<span class="fw-bold d-none d-md-inline"
 									style="font-size: 24px; vertical-align: top">Bookmark</span>
@@ -53,6 +57,20 @@
 									style="font-size: 24px; vertical-align: top">Profile</span>
 							</a>
 						</div>
+						<div class="float-end float-md-none mt-auto">
+							<div class="dropup btn border-0 rounded-5 text-decoration-none m-1 m-md-2 py-2">
+								<a href="#" class="d-flex align-items-center link-dark text-decoration-none" id="dropdownUser2"
+									data-bs-toggle="dropdown" aria-expanded="false">
+									<img class="rounded-circle me-md-2 object-fit-cover" width="40px" height="40px"
+										src="{{ asset('client/image/pfp/'. auth()->user()->settings->pfp_url)}}" alt="pfp">
+									<strong class="d-none d-md-inline">{{ auth()->user()->settings->username }}<span
+											class="dropdown-toggle ms-2"></span></strong>
+								</a>
+								<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+									<li><a href="{{ url('logout') }}" class="dropdown-item" href="#">Sign out</a></li>
+								</ul>
+							</div>
+						</div>
 						@endif
 					</div>
 				</div>
@@ -65,13 +83,19 @@
 					<div class="pt-2 sticky-top">
 						<div>
 							@if (Auth::check())
-							<a href="{{ url('logout') }}"
-								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Log Out</b></a>
-							@endif
-							@if (Auth::guest())
-							<a href="{{ url('welcome') }}" class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
-							<a href="{{ url('welcome') }}"
-								class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
+								@if (Auth::user()->role == 2)
+									<a href="{{ url('logout') }}"
+										class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Logout</b></a>
+									<a href="{{ url('dashboard') }}"
+										class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Admin Dash</b></a>
+								@else
+									<a href="{{ url('logout') }}"
+										class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Logout</b></a>
+								@endif
+							@else
+								<a href="{{ url('welcome') }}" class="float-end btn btn-outline-dark rounded-5"><b>Log in</b></a>
+								<a href="{{ url('welcome') }}"
+									class="float-end btn btn-outline-dark rounded-5 btn-light me-2"><b>Register</b></a>
 							@endif
 						</div>
 						<div class="container">
@@ -109,6 +133,7 @@
 
 	<!-- Bootstrap JavaScript Libraries -->
 	@include('library.script')
+	@include('library.jScroll')
 	@yield('js')
 </body>
 

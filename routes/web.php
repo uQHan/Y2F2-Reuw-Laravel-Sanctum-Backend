@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Client\BlogController;
+use App\Http\Controllers\Client\CommentController;
 use App\Http\Controllers\Client\ProfileController;
 use App\Http\Controllers\Client\UserSettingsController;
 use Illuminate\Support\Facades\Route;
@@ -51,8 +53,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/setup-account', [UserSettingsController::class, 'store']);
     
     Route::get('/profile', [ProfileController::class, 'index']);
+    Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
     Route::get('/settings', [UserSettingsController::class, 'index']);
     Route::post('/settings', [UserSettingsController::class, 'update']);
+
+    Route::post('/post', [BlogController::class, 'store']);
+    Route::post('/comment', [CommentController::class, 'store']);
+    Route::get('/like/{blog_id}', [BlogController::class, 'like']);
+    Route::get('/bookmark', [BlogController::class, 'bookmarkList']);
+    Route::get('/bookmark/{blog_id}', [BlogController::class, 'bookmark']);
 });
 
 //admin routes
@@ -60,6 +69,10 @@ Route::get('/admin-login', [AdminLoginController::class, 'index']);
 
 //backend admin routes
 Route::middleware('admin')->group(function () {
-    
     Route::get('/dashboard', [AdminController::class, 'index']);
+
+    Route::get('/list-users', [AdminController::class, 'users']);
+
+    Route::get('/list-blogs', [AdminController::class, 'blogs']);
+    Route::get('/remove-blog/{blog_id}', [AdminBlogController::class, 'remove']);
 });

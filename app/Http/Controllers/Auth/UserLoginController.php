@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,9 +13,10 @@ class UserLoginController extends Controller
 {
     public function index()
     {
-        if (Auth::check())
-            return view('client.home');
-        else
+        if (Auth::check()) {
+            $blogs = Blog::orderBy('created_at', 'desc')->paginate(10);
+            return view('client.home', compact('blogs'));
+        } else
             return view('client.welcome');
     }
 
