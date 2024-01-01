@@ -6,7 +6,7 @@
       <div class="card-body">
          <div class="mb-2">
             {{-- <label class="ms-2 fw-bold" for="postTitle">Title*</label> --}}
-            <input name="postTitle" type="text" class="form-control" placeholder="Title">
+            <input name="postTitle" type="text" class="form-control" placeholder="Title" maxlength="100">
          </div>
          <div>
             <textarea name="postText" class="form-control" id="" rows="3" placeholder="Text(Optional)"></textarea>

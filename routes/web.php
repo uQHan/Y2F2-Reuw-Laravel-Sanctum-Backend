@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBlogController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\UserLoginController;
 use App\Http\Controllers\Auth\UserRegisterController;
@@ -54,7 +55,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/profile', [ProfileController::class, 'index']);
     Route::get('/profile/{user_id}', [ProfileController::class, 'index']);
-    Route::get('/settings', [UserSettingsController::class, 'index']);
+    Route::get('/settings', [UserSettingsController::class, 'settings']);
     Route::post('/settings', [UserSettingsController::class, 'update']);
 
     Route::post('/post', [BlogController::class, 'store']);
@@ -71,8 +72,9 @@ Route::get('/admin-login', [AdminLoginController::class, 'index']);
 Route::middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index']);
 
-    Route::get('/list-users', [AdminController::class, 'users']);
+    Route::get('/list-users', [AdminUserController::class, 'users']);
+    Route::get('/list-users/{user_id}', [AdminUserController::class, 'deactivate']);
 
-    Route::get('/list-blogs', [AdminController::class, 'blogs']);
+    Route::get('/list-blogs', [AdminBlogController::class, 'blogs']);
     Route::get('/remove-blog/{blog_id}', [AdminBlogController::class, 'remove']);
 });

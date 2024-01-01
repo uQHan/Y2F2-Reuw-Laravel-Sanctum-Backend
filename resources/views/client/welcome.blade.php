@@ -27,6 +27,11 @@
 						<br>
 						to continue
 					</p>
+					@if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-warning col-6 offset-3 mt-4">{{$error}}</p>
+                @endforeach
+                @endif
 				</div>
 				<div class="col-12 col-md-5 cover">
 					<a href="mailto:hanng.22ite@vku.udn.vn" class="text-decoration-none text-black">

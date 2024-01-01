@@ -26,18 +26,18 @@
                         <label for="date-of-birth">Date of birth*</label>
                         <div class="input-group" name="date-of-birth">
                             <select name="date" class="form-select form-select-lg mb-3">
-                                <option class="d-none">Date</option>
+                                <option class="d-none" value="{{ now()->format('d')}}" selected>Date</option>
                                 @for ($d = 1; $d < 32; $d++) <option value="{{$d}}">{{$d}}</option>
                                     @endfor
                             </select>
                             <select name="month" class="form-select form-select-lg mb-3">
-                                <option class="d-none">Month</option>
+                                <option class="d-none" value="{{ now()->format('m')}}" selected>Month</option>
                                 @for ($m = 1; $m < 13; $m++) <option value="{{$m}}">{{\Carbon\Carbon::create(null,
                                     $m)->format('F')}}</option>
                                     @endfor
                             </select>
                             <select name="year" class="form-select form-select-lg mb-3">
-                                <option class="d-none">Year</option>
+                                <option class="d-none" value="{{ now()->format('Y')}}" selected>Year</option>
                                 @for ($d = date("Y"); $d > date("Y")-100; $d--)
                                 <option value="{{$d}}">{{$d}}</option>
                                 @endfor

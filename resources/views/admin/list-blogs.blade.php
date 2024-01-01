@@ -25,12 +25,10 @@ Index
                     <tbody class="body-blog">
                         <?php $count = ($blogs->currentPage() - 1) * 5 + 1; ?>
                         @forelse ($blogs as $blog)
-                        <tr class="d-flex justify-content-between">
+                        <tr class="d-flex justify-content-between @if ($blog->deleted) table-danger @endif">
                             <td class="w-20 counter">{{ $count++ }}</td>
                             <td class="w-50">
-                                <a href="#" class="text-decoration-none">
-                                    <u>{{ $blog->title }}</u>
-                                </a>
+                                <p>{{ $blog->title }}</p>
                             </td>
                             <td style="white-space: pre-line" class="w-100 linelimit-6">{{ $blog->content }}
                             </td>
@@ -39,7 +37,7 @@ Index
                                     src="{{ asset('client/image/' . $blog->image_url) }}" alt="">
                             </td>
                             <td scope="col" class="w-50">
-                                {{ \Carbon\Carbon::parse($blog->created_at)->format('d/m/Y') }}
+                                {{ \Carbon\Carbon::parse($blog->created_at)->format('h:m:s - d/m/Y') }}
                             </td>
                             <td class="w-20">
                                 <a href="#" onclick="confirmDelete('{{ url('/remove-blog/' . $blog->blog_id) }}')"

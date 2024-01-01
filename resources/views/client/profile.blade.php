@@ -31,17 +31,17 @@
         </div>
         <div class="d-flex justify-content-end text-center py-1">
             <div class="me-1">
-                <p class="mb-1 h5">0</p>
+                <p class="mb-1 h5">{{auth()->user()->blogs->count()}}</p>
                 <p class="small text-muted mb-0">Posts</p>
             </div>
-            <div class="px-3">
+            {{-- <div class="px-3">
                 <p class="mb-1 h5">0</p>
                 <p class="small text-muted mb-0">Followers</p>
             </div>
             <div>
                 <p class="mb-1 h5">0</p>
                 <p class="small text-muted mb-0">Following</p>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

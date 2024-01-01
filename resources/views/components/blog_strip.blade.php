@@ -37,9 +37,11 @@
          <div class="p-2">
             <div>
                <h4 class="card-text linelimit-3">{{$blog->title}}</h4>
-               <p class="card-text linelimit-6">{{$blog->content}}</p>
+               @if ($blog->content)
+               <p class="card-text linelimit-6">{{$blog->content}}</p>                  
+               @endif
             </div>
-            @if ($blog->image_url != null)
+            @if ($blog->image_url)
             <div class="pt-2 blog-img-container">
                <img class="rounded-4" src="{{ asset('client/image/'. $blog->image_url)}}" alt="">
             </div>

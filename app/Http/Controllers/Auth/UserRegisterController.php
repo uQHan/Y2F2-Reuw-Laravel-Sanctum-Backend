@@ -23,7 +23,7 @@ class UserRegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator, 'register');
+            return back()->withErrors($validator);
         }
         
         $validator->validated();

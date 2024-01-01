@@ -5,11 +5,11 @@
             <div class="d-flex">
                 <div class="pt-2">
                     <img class="rounded-circle pfp-img ms-2"
-                        src="{{ asset('client/image/pfp/'.$blog->user->settings->pfp_url)}}" alt="pfp">
+                        src="{{ asset('client/image/pfp/'.$settings->pfp_url)}}" alt="pfp">
                 </div>
                 <div class="flex-fill">
                     <div class="pt-2 ps-2">
-                        <span class="me-2"><b>{{ $blog->user->settings->username }}</b></span>
+                        <span class="me-2"><b>{{ $settings->username }}</b></span>
                         <div class="text-secondary">
                             <span class="me-1">
                                 {{\Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}

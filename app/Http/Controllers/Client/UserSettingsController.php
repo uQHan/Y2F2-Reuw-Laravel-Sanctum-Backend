@@ -14,6 +14,11 @@ class UserSettingsController extends Controller
 {
     public function index()
     {
+        return view('client.setup');
+    }
+
+    public function settings()
+    {
         return view('client.settings');
     }
 

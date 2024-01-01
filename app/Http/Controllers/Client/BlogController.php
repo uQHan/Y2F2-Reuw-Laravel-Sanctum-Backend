@@ -35,7 +35,7 @@ class BlogController extends Controller
             $imagePath = time() . "-" . $image_name . "." . $get_image_extension;
             $get_file_image->move('./client/image/', $imagePath);
         } else {
-            $imagePath = "placeholder.png";
+            $imagePath = null;
         }
 
         Blog::create([
