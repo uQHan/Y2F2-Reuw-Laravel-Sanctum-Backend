@@ -68,8 +68,10 @@ Index
                                 {{ \Carbon\Carbon::parse($user->created_at)->format('h:m:s - d/m/Y') }}
                             </td>
                             <td class="w-20">
+                                @if ( $user->role != 2 )
                                 <a href="#" onclick="confirmDelete('{{ url('/deactivate-user/' . $user->user_id) }}')"
-                                    data-confirm-delete="true" class="fa fa-times"></a>
+                                    data-confirm-delete="true" class="fa fa-times"></a>                                    
+                                @endif
                             </td>
                         </tr>
                         @empty
