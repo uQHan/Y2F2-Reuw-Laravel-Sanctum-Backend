@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/setup-account', [UserSettingsController::class, 'store']);
     
     Route::get('/profile', [ProfileController::class, 'index']);
-    Route::get('/profile/{user_id}', [ProfileController::class, 'orther']);
+    Route::get('/profile/{user_id}', [ProfileController::class, 'other']);
     Route::get('/settings', [UserSettingsController::class, 'settings']);
     Route::post('/settings', [UserSettingsController::class, 'update']);
 

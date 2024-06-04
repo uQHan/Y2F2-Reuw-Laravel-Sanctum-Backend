@@ -61,8 +61,12 @@ class UserSettingsController extends Controller
             'bio' => $request->bio,
             'website' => $request->website
         ]);
-
-        return redirect('/home');
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return redirect('/home');
+        }
+        
     }
 
     public function update(Request $request)
@@ -103,7 +107,10 @@ class UserSettingsController extends Controller
             'bio' => $request->bio,
             'website' => $request->website
         ]);
-
-        return redirect('/profile');
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return redirect('/profile');
+        }
     }
 }

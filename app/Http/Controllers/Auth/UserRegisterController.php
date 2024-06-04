@@ -23,7 +23,11 @@ class UserRegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator);
+            if ($request->expectsJson()){
+                return response();
+            } else {
+                return back()->withErrors($validator);
+            }
         }
         
         $validator->validated();
@@ -36,8 +40,16 @@ class UserRegisterController extends Controller
         Auth::loginUsingId($user->user_id);
 
         if (!$user->settings()->exists()) {
-            return redirect('/setup-account');
+            if ($request->expectsJson()){
+                return response();
+            } else {
+                return redirect('/setup-account');
+            }
         }
-        return redirect('/home');
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return redirect('/home');
+        }
     }
 }

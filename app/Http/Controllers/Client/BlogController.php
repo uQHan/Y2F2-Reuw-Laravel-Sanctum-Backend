@@ -7,16 +7,21 @@ use App\Models\Blog;
 use App\Models\Bookmark;
 use App\Models\Like;
 use App\Models\User;
+use App\Services\Client\BlogService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $blogs = Blog::orderBy('created_at', 'desc')->paginate(5);
-        return view('client.home', compact('blogs'));
+        if ($request->expectsJson()){
+            return response()->json($blogs);
+        } else {
+            return view('client.home', compact('blogs'));            
+        }
     }
 
     public function store(Request $request)
@@ -44,12 +49,16 @@ class BlogController extends Controller
             "content" => $request->postText,
             "image_url" => $imagePath,
         ]);
-
-        return back();
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return back();          
+        }
     }
 
-    public function like($blog_id)
+    public function like(Request $request)
     {
+        $blog_id = $request->blog_id;
         $user = User::find(auth()->user()->user_id);
         $hasLike = $user->likes()->where('likes.blog_id', $blog_id)->exists();
         if (!$hasLike){
@@ -57,11 +66,16 @@ class BlogController extends Controller
         } else {
             $user->likes()->detach($blog_id);
         }
-        return back();
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return back();          
+        }
     }
 
-    public function bookmark($blog_id)
+    public function bookmark(Request $request)
     {
+        $blog_id = $request->blog_id;
         $user = User::find(auth()->user()->user_id);
         $hasBookmark = $user->bookmarks()->where('bookmarks.blog_id', $blog_id)->exists();
         if (!$hasBookmark){
@@ -69,12 +83,20 @@ class BlogController extends Controller
         } else {
             $user->bookmarks()->detach($blog_id);
         }
-        return back();
+        if ($request->expectsJson()){
+            return response();
+        } else {
+            return back();          
+        }
     }
 
-    public function bookmarkList()
+    public function bookmarkList(Request $request)
     {
         $blogs = User::find(auth()->user()->user_id)->bookmarks()->orderBy('bookmarks.created_at', 'desc')->paginate(10);
-        return view('client.bookmark', compact('blogs'));
+        if ($request->expectsJson()){
+            return response()->json($blogs);
+        } else {
+            return view('client.bookmark', compact('blogs'));          
+        }
     }
 }

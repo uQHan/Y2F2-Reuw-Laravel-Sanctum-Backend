@@ -13,9 +13,9 @@ class AdminBlogController extends Controller
         return view('admin.list-blogs', compact('blogs'));
     }
     public function remove($blog_id){
-        $rmv = Blog::find($blog_id);
-        $rmv->deleted = true;
-        $rmv->save();
+        $remove_blog = Blog::find($blog_id);
+        $remove_blog->deleted = true;
+        $remove_blog->save();
         return back();
     }
 }
