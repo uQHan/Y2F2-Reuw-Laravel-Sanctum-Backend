@@ -30,7 +30,6 @@ Route::post('/login', [UserLoginController::class, 'store']);
 Route::post('/register', [UserRegisterController::class, 'store']);
 
 //client routes
-Route::middleware('auth:sanctum')->group(function () {
     Route::get('/logout', [UserLoginController::class, 'logout']);
     Route::get('/setup-account', [UserSettingsController::class, 'index']);
     Route::post('/setup-account', [UserSettingsController::class, 'store']);
@@ -44,6 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/post', [BlogController::class, 'store']);
     Route::post('/comment', [CommentController::class, 'store']);
     Route::get('/like/{blog_id}', [BlogController::class, 'like']);
+    Route::get('/isLiked/{blog_id}', [BlogController::class, 'isLiked']);
     Route::get('/bookmark', [BlogController::class, 'bookmarkList']);
     Route::get('/bookmark/{blog_id}', [BlogController::class, 'bookmark']);
-});
+    Route::get('/isBookmarked/{blog_id}', [BlogController::class, 'isBookmarked']);

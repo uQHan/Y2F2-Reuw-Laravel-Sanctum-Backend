@@ -23,13 +23,13 @@ class UserRegisterController extends Controller
         ]);
 
         if ($validator->fails()) {
-            if ($request->expectsJson()){
+            if ($request->expectsJson()) {
                 return response();
             } else {
                 return back()->withErrors($validator);
             }
         }
-        
+
         $validator->validated();
 
         $user = User::create([
@@ -40,14 +40,17 @@ class UserRegisterController extends Controller
         Auth::loginUsingId($user->user_id);
 
         if (!$user->settings()->exists()) {
-            if ($request->expectsJson()){
+            if ($request->expectsJson()) {
                 return response();
             } else {
                 return redirect('/setup-account');
             }
         }
-        if ($request->expectsJson()){
-            return response();
+        if ($request->expectsJson()) {
+            $token = $request->user()->createToken('access_token');
+            if (!User::find(Auth::user()->user_id)->settings()->exists())
+                return response()->json(['token' => $token->plainTextToken, 'settings' => 'false']);
+            return response()->json(['token' => $token->plainTextToken, 'settings' => 'true']);
         } else {
             return redirect('/home');
         }

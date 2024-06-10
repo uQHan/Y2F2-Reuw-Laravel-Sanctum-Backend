@@ -18,9 +18,8 @@ class CORs
         $headers = [
             'Access-Control-Allow-Origin' => '*',
             'Access-Control-Allow-Methods' => '*',
-            'Access-Control-Allow-Headers' => 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-            // 'Access-Control-Allow-Credentials' => 'false',
-            // 'Access-Control-Allow-Headers' => 'X-CSRF-Token'
+            'Access-Control-Allow-Headers' => 'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Authorization, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, X-CSRF-Token',
+            'Access-Control-Allow-Credentials' => 'false',
         ];
         $reponse = $next($request);
         foreach ($headers as $key => $values)

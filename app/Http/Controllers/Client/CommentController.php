@@ -24,8 +24,13 @@ class CommentController extends Controller
         } else {
             $imagePath = "placeholder.png";
         }
+        if ($request->expectsJson()){
+            $id = auth('sanctum')->user()->user_id;
+        } else {
+            $id = auth()->user()->user_id;         
+        }
         Comment::create([
-            "user_id" => auth()->user()->user_id,
+            "user_id" => $id,
             "blog_id" => $request->blogID,
             "content" => $request->commentText,
             "image_url" => $imagePath,
